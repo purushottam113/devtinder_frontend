@@ -1,16 +1,19 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
+
+
 
 const NavBar = () => {
+  const user = useSelector((store)=> store.user)
+
   return (
     <div className="navbar bg-base-200">
     <div className="flex-1">
       <a className="btn btn-ghost text-xl">DevTinder</a>
     </div>
     <div className="flex-none gap-2">
-      <div className="form-control">
-        <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-      </div>
-      <div className="dropdown dropdown-end">
+      <p>Welcome {user.firstName}</p>
+      {user && <div className="dropdown dropdown-end">
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
           <div className="w-10 rounded-full">
             <img
@@ -30,7 +33,7 @@ const NavBar = () => {
           <li><a>Settings</a></li>
           <li><a>Logout</a></li>
         </ul>
-      </div>
+      </div>}
     </div>
   </div>
   )

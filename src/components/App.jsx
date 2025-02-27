@@ -3,12 +3,15 @@ import Body from "./Body"
 import Login from "./Login"
 import Logout from "./Logout"
 import SignIn from "./SignIn"
+import { Provider } from "react-redux"
+import appStore from "../utils/appStore"
 
 function App() {
 
   return (
     <>
-        <BrowserRouter>
+    <Provider store={appStore}>
+        <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element = {<Body/>}>
               <Route path="/login" element= {<Login/>}></Route>
@@ -17,6 +20,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
+    </Provider>
     </>
   )
 }
