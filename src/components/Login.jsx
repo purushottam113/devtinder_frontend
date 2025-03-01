@@ -9,6 +9,7 @@ const Login = () => {
 
     const [emailID, setEmailID] = useState("sachin@gmail.com")
     const [password, setPassword] = useState("Sachin@123")
+    const [err, setErr] = useState("")
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -19,10 +20,10 @@ const Login = () => {
                 password
             },{withCredentials: true})
             dispatch(addUser(res.data))
-            return navigate("/")
+            return navigate("/feed")
 
         } catch (error) {
-            console.error(error)
+            setErr(error?.response?.data)
         }
     }
 
@@ -45,7 +46,7 @@ const Login = () => {
                 </div>
                 <input type="text" placeholder="" className="input input-bordered w-full max-w-xs" value={password} onChange={(e)=> setPassword(e.target.value)} />
             </label>
-            
+            <p className='text-red-600'>{err}</p>
             <div className="card-actions justify-center mt-5">
                 <button className="btn" onClick={()=> handleLogIn(emailID, password)}>Submit</button>
             </div>
