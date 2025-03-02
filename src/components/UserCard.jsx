@@ -3,14 +3,14 @@ import { Default_Profile_PNG } from '../utils/constants'
 
 const UserCard = ({user}) => {
 
-    const {firstName, lastName, age, gender, about, profileURL} = user
+    const {firstName, lastName, age, gender, about, profilePhotoURL} = user
 
   return (
     <div className='flex justify-center my-5'>
       <div className="card bg-base-300 w-96 shadow-sm">
   <figure>
     <img
-      src={profileURL || Default_Profile_PNG}
+      src={profilePhotoURL || Default_Profile_PNG}
       alt="Shoes" />
   </figure>
   <div className="card-body">

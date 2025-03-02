@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
 import { removeUser } from '../utils/userSlice';
-
+import { Default_Profile_PNG } from '../utils/constants'
 
 
 const NavBar = () => {
@@ -34,7 +34,7 @@ const NavBar = () => {
           <div className="w-10 rounded-full">
             <img
               alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+              src= {user.profilePhotoURL || Default_Profile_PNG}/>
           </div>
         </div>
         <ul
