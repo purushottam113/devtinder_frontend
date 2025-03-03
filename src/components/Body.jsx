@@ -20,7 +20,6 @@ const Body = () => {
         if(error.status === 401){
           return navigate("/login")
         }
-        console.error(error)
       }
   }
 
