@@ -1,9 +1,25 @@
 import React from 'react'
-import { Default_Profile_PNG } from '../utils/constants'
+import { BASE_URL, Default_Profile_PNG } from '../utils/constants'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { removeFeed } from '../utils/feedSlice'
 
 const UserCard = ({user}) => {
+  const dispatch = useDispatch();
 
-    const {firstName, lastName, age, gender, about, profilePhotoURL} = user
+    const {_id, firstName, lastName, age, gender, about, profilePhotoURL} = user
+
+    const handleIntrest = async (status, _id) =>{
+      try {
+        await axios.post(BASE_URL + "/request/send/" + status +"/"+ _id,
+          {},
+        {withCredentials:true})
+        dispatch(removeFeed(_id))
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
 
   return (
     <div className='flex justify-center my-5'>
@@ -18,8 +34,8 @@ const UserCard = ({user}) => {
     <p>{age + ", "+ gender}</p>
     <p>{about}</p>
     <div className="card-actions justify-center mt-3">
-      <button className="btn btn-secondary">Intrested</button>
-      <button className="btn btn-primary">Ignore</button>
+      <button className="btn btn-secondary" onClick={()=>handleIntrest("intrested", _id)}>Intrested</button>
+      <button className="btn btn-primary" onClick={()=>handleIntrest("ignored", _id)}>Ignore</button>
     </div>
   </div>
 </div>

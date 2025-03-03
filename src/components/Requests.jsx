@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { BASE_URL, Default_Profile_PNG } from '../utils/constants'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { addRequests } from '../utils/requestsSlice'
+import { addRequests, removeRequests } from '../utils/requestsSlice'
 
 const Requests = () => {
     const dispatch = useDispatch();
@@ -17,12 +17,12 @@ const Requests = () => {
         }
     }
 
-    const reviewRequest = async (state, id) => {
+    const reviewRequest = async (state, _id) => {
         try {
-            const res = await axios.post(BASE_URL + "/request/review/"+ state+ "/"+ id,{},{withCredentials: true});
-            getRequests()
+            const res = await axios.post(BASE_URL + "/request/review/"+ state+ "/"+ _id,{},{withCredentials: true});
+            dispatch(removeRequests(_id))
         } catch (error) {
-            console.log(error)
+            console.log(error)  
         }
     }
 

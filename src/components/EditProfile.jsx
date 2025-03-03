@@ -9,24 +9,24 @@ const EditProfile = ({user}) => {
 
         const [firstName, setFirstName]= useState(user?.firstName)
         const [lastName, setLastName]= useState(user?.lastName)
-        const [gender, setGender]= useState(user?.gender)
+        const [gender, setGender]= useState(user?.gender || "Male")
         const [about, setAbout]= useState(user?.about)
-        const [age, setAge]= useState(user?.age)
-        const [skills, setSkills]= useState(user?.age)
-        const [profilePhotoURL, setProfilePhotoURL]= useState(user?.profilePhotoURL)
+        const [age, setAge]= useState(user?.age || "")
+        const [skills, setSkills]= useState(user?.skills || "")
+        const [profilePhotoURL, setProfilePhotoURL]= useState(user?.profilePhotoURL || "")
         const [err, setErr] = useState("")
         const [toast, setToast] = useState(false)
         const dispatch = useDispatch()
 
         const handleEdit = async() =>{
             try {
-                const res = await axios.patch(BASE_URL + "/profile/edit",{firstName, lastName, age, gender, about, profilePhotoURL},{withCredentials:true})
-                setErr("")
+                const res = await axios.patch(BASE_URL + "/profile/edit",{firstName, lastName, age, gender, about, skills, profilePhotoURL},{withCredentials:true})
                 setToast(true)
                 dispatch(addUser(user)) 
                 setTimeout(()=>setToast(false),3000)
             } catch (error) {
                 setErr(error?.response?.data)
+                console.log(error)
             }   
         }
 
@@ -84,7 +84,7 @@ const EditProfile = ({user}) => {
                 <div className="label">
                     <span className="age">Gender</span>
                 </div>
-            <select defaultValue={gender} className="select" onSelect={(e)=> setGender(e.target.value)}>
+            <select defaultValue={gender} className="select" onChange={(e)=> setGender(e.target.value)}>
                 <option disabled={true}>Gender</option>
                 <option>Male</option>
                 <option>Female</option>

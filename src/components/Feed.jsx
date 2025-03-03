@@ -22,6 +22,10 @@ const Feed = () => {
         //handle Error
     }
 
+    if(!feed) return
+
+    if(feed.length <= 0) return <p className= "text-center font-bold text-3xl">No New User Found</p>
+
   return (
     <div>
       {feed && <UserCard user={feed[0]}/>}

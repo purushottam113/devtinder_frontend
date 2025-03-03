@@ -14,7 +14,7 @@ const NavBar = () => {
 
   const handleLogout = async ()=>{
     try {
-      await axios.post(BASE_URL + "/logout",{ withCredentials: true })
+      await axios.post(BASE_URL + "/logout",{},{ withCredentials: true })
       dispatch(removeUser())
       return navigate("/login")
     } catch (error) {
@@ -25,7 +25,7 @@ const NavBar = () => {
   return (
     <div className="navbar bg-base-200">
     <div className="flex-1">
-      <Link to="/" className="btn btn-ghost text-xl">DevTinder</Link>
+      <Link to="/feed" className="btn btn-ghost"><p className='text-2xl'>DevTinder</p></Link>
     </div>
     {user && <div className="flex-none gap-2">
       <p>Welcome {user.firstName}</p>

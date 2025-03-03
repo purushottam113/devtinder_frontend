@@ -9,7 +9,8 @@ const feedSlice = createSlice({
     },
 
     removeFeed: (state, action)=>{
-      return null
+      const newFeed = state.filter((card)=>card._id !== action.payload)
+      return newFeed;
     }
   }
 });
